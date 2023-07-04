@@ -1,15 +1,12 @@
+
 import React, { useState, useEffect } from 'react';
 
-import './App.css';
 
 import { BrowserRouter as Router, Routes, Route, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 
-import MainDashboardView from './components/pages/MainDashboardContent';
-
-
-function App() {
+function Login() {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -50,14 +47,9 @@ function App() {
   };
 
   return (
-    <>
-     {storedToken ? (
-        <MainDashboardView/>
-        
-        // <p>{token}</p>
-      ) : (
-        <div className="form-screen">
-            <a href="index-2.html" className="spur-logo"><i className="fas fa-bolt"></i> <span>Spur</span></a>
+      <>
+      <div className="form-screen">
+            <a href="" className="spur-logo"><i className="fas fa-bolt"></i> <span>Spur</span></a>
             <div className="card account-dialog">
                 <div className="card-header bg-primary text-white"> Please sign in </div>
                 <div className="card-body">
@@ -82,35 +74,8 @@ function App() {
                 </div>
             </div>
         </div>
-        )}
-
-   
-    {/* {isLoggedIn ? (
-        <p>You are not logged in!</p>
-      ) : (
-        <Router>
-          <div className="dash">
-            <div className="dash-nav dash-nav-dark">
-              <TopbarlogoSection/>
-
-              <Nav/>
-            </div>
-
-            <div className="dash-app">
-              <Topbar/>
-
-              <Routes>
-                <Route path="/dashboard-view" element = {<MainDashboardView/> }/> 
-                <Route path="/products" element = {<ProductsView/> }/> 
-              </Routes> 
-
-            </div>
-          </div>
-          </Router>
-          )} */}
-     
-    </>
+      </>
   );
 }
 
-export default App;
+export default Login;
