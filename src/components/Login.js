@@ -1,27 +1,17 @@
 
 import React, { useState, useEffect } from 'react';
+import BASE_URL from './../config';
 
-
-import { BrowserRouter as Router, Routes, Route, useParams } from "react-router-dom";
+import { Routes, Route, useNavigate  } from 'react-router-dom'; 
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 
 function Login() {
+  const apiUrl = BASE_URL;
+  //console.log(apiUrl);
+  const navigate =useNavigate();
+
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
-
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [token, setToken] = useState(false);
-
-  useEffect(() => {
-    const storedToken = localStorage.getItem('token');
-    if (storedToken) {
-      setToken(storedToken);
-    }
-  }, []);
-
-
-  const storedToken = localStorage.getItem('token');
-  // console.log('Token retrieved from local storage:', storedToken);
 
   const onSubmit = (data) => {
     var formvalues = JSON.stringify(data);
@@ -29,14 +19,15 @@ function Login() {
     //console.log(data);
     const article = { email: data.email, password: data.password };
 
-
-    axios.post('http://127.0.0.1:8000/api/login', article)
+    axios.post(apiUrl+'api/login', article)
     .then(result => {
         const bearerToken = result.data.data.token;
-
         // Store the token in the component's state
-        setToken(bearerToken);
+        // setToken(bearerToken);
         localStorage.setItem('token', bearerToken);
+        window.location.href = "/admin-dashboard";
+        // this.props.history.push('/admin-dashboard');
+        navigate('/admin-dashboard');
       
       }).catch(error => {
         // this.setState({ errorMessage: error.message });
@@ -56,11 +47,11 @@ function Login() {
                 <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-group">
                             <input type="email"  {...register("email", { required: true })} className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"/>
-                            {errors.email && <span>This field is required</span>}
+                            {errors.email && <span className='form-error'>This field is required</span>}
                         </div>
                         <div className="form-group">
                             <input type="password" className="form-control" {...register("password", { required: true })} id="password" placeholder="Password"/>
-                            {errors.password && <span>This field is required</span>}
+                            {errors.password && <span className='form-error'>This field is required</span>}
                         </div>
                         <div className="form-group">
                             <div className="custom-control custom-checkbox">
