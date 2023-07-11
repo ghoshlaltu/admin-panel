@@ -8,9 +8,6 @@ import { useForm } from "react-hook-form";
 import BASE_URL from '../../config';
 
 
-import { MDBDataTable } from 'mdbreact';
-
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -157,7 +154,7 @@ function Testimonials() {
     // after add submit 
 
     
-    // after edit submit 
+    // after add submit 
     const onSubmitEdit = async (data) => {
       
       setLoading(true);
@@ -194,7 +191,7 @@ function Testimonials() {
           };
         });
     };
-    // after edit submit 
+    // after add submit 
 
     //call all testimonials data
     useEffect(() => {

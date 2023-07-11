@@ -4,10 +4,31 @@ import {Button, Modal, Form} from 'react-bootstrap';
 import axios from 'axios';
 import { useForm } from "react-hook-form";
 import BASE_URL from '../../config';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const InstagramPost = () => {
   const apiUrl = BASE_URL;
+  const SuccessNotify = (val) => toast.success('🦄 Success ! ' + val, {
+                                  position: "top-right",
+                                  autoClose: 5000,
+                                  hideProgressBar: false,
+                                  closeOnClick: true,
+                                  pauseOnHover: true,
+                                  draggable: true,
+                                  progress: undefined,
+                                  theme: "colored",
+                                  });
+const ErrorNotify = (val) => toast.error('Error ! '+ val, {
+                              position: "top-right",
+                              autoClose: 5000,
+                              hideProgressBar: false,
+                              closeOnClick: true,
+                              pauseOnHover: true,
+                              draggable: true,
+                              progress: undefined,
+                              theme: "colored",
+                              });
 
   const [loading, setLoading] = useState(false);
   const [myData, setData] = useState([]);
@@ -37,6 +58,7 @@ const fetchData = async () => {
       }
     });
     setData(response.data);
+    // SuccessNotify(response.data.message);
     setLoading(false); 
   } catch (error) {
     console.error(error);
@@ -114,17 +136,29 @@ const fetchData = async () => {
         if (response.ok) {
           const responseData = await response.json();
          
-          console.log(responseData.message); // Response data will be logged in the console
-          // SuccessNotify(responseData.message);
+          //console.log(responseData.message); // Response data will be logged in the console
+          SuccessNotify(responseData.message);
           setLoading(false);
           reset(); 
           addPopUpModal(false);
           fetchData();
         } else {
           console.error('Error:', response.status);
+          
         }
       } catch (error) {
-        console.error('Error:', error);
+        // console.error('Error:', error);
+        if (error.response && error.response.data && error.response.data.data) {
+          const errorData = error.response.data.data;
+          return Object.keys(errorData).map((key) => {
+            if (Array.isArray(errorData[key])) {
+              return errorData[key].map((errorMsg, index) => (
+                ErrorNotify(errorMsg)
+              ));
+            }
+          });
+          return null;
+        };
       }
     };
     // after add submit 
@@ -132,9 +166,10 @@ const fetchData = async () => {
 
 
     // edit click
+    const [editIsShow, editModal] = React.useState(false)
     const [editApiData, setEditApiData] = useState(false);
     const handleEdit = async (rowId) => {
-
+      setLoading(true);
       axios.get(apiUrl+'api/instagram-post-details/'+rowId, {
         headers: {
           'Content-Type': 'application/json',
@@ -148,12 +183,13 @@ const fetchData = async () => {
           editReset(fetchedData); // Reset the form values with the fetched data
           // console.log(response.data.data[0].name);
           return editModal(true);
+          // setLoading(false);
         })
         .catch(error => {
           console.error('Error fetching data:', error);
         });
     };
-    console.log(editApiData);
+    //console.log(editApiData);
     // edit click 
     // after edit submit 
     const onSubmitEdit = async (data) => {
@@ -186,10 +222,15 @@ const fetchData = async () => {
         const response = await fetch(apiUrl+'api/instagram-post-details-update', requestOptions);
         if (response.ok) {
           const responseData = await response.json();
+          //console.log(responseData.message);
+          closeEditModal();
+          setLoading(false);
+          fetchData();
+          SuccessNotify(responseData.message);
+          // closeEditModal();
          
           // SuccessNotify(response.data.message);
-          fetchData();
-          return editModal(false);
+          // fetchData();
         } else {
           console.error('Error:', response.status);
         }
@@ -199,9 +240,9 @@ const fetchData = async () => {
           const errorData = error.response.data.data;
           return Object.keys(errorData).map((key) => {
             if (Array.isArray(errorData[key])) {
-              // return errorData[key].map((errorMsg, index) => (
-              //   ErrorNotify(errorMsg)
-              // ));
+              return errorData[key].map((errorMsg, index) => (
+                ErrorNotify(errorMsg)
+              ));
             }
           });
           return null;
@@ -210,18 +251,42 @@ const fetchData = async () => {
     };
     // after edit submit 
     
-    const handleDelete = (rowId) => {
-      // Handle delete functionality for the row with the given rowId
-      console.log('Delete row:', rowId);
-    };
-
-    const [editIsShow, editModal] = React.useState(false)
-
     const closeEditModal = () => {
+      setLoading(false);
       editReset();
       return editModal(false);
     }
     // edit 
+
+    // delete 
+    const handleDelete = async (rowId) => {
+      setLoading(true);
+      // Handle delete functionality for the row with the given rowId
+      //console.log('Delete row:', rowId);
+      const shouldDelete = window.confirm("Are you sure you want to delete?");
+      if (shouldDelete) {
+        // Perform deletion logic here
+        // alert(`Deleting ${value}...`);
+        const article = { id: rowId };
+
+        axios.post(apiUrl+'api/instagram-post-delete', article, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: token,
+          },
+        })
+          .then(response => {
+            SuccessNotify(response.data.message);
+            fetchData();
+            setLoading(false);
+          })
+          .catch(error => {
+            // console.error('Error fetching data:', error);
+            ErrorNotify(error.response.data.data)
+          });
+      }
+    };
+    // delete 
 
   return (
     <>
@@ -334,7 +399,18 @@ const fetchData = async () => {
               <div className="row">
               <div className="col-lg-6">
                 <h1 className="dash-title">All Instagram Posts</h1>
-               
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="colored"
+                    />
               </div>
               <div className="col-lg-6 text-right">
                 <Button variant="success" onClick={() => addModal()}>
