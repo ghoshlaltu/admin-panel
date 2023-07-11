@@ -21,17 +21,20 @@ function Leftbarnav() {
                 <i className="fas fa-home" /> <Link to="/admin-dashboard">Dashboard</Link> 
             </a>
             <div className="dash-nav-dropdown">
-            <a href="#!" className="dash-nav-item dash-nav-dropdown-toggle">
-                <i className="fas fa-chart-bar" /> Product </a>
-            <div className="dash-nav-dropdown-menu">
-                <a className="dash-nav-dropdown-item"><Link to="/testimonials">Products</Link> </a>
-            </div>
+                <a href="#!" className="dash-nav-item dash-nav-dropdown-toggle">
+                    <i className="fas fa-chart-bar" /> Product </a>
+                <div className="dash-nav-dropdown-menu">
+                    <a className="dash-nav-dropdown-item"><Link to="/testimonials">Products</Link> </a>
+                </div>
+                <div className="dash-nav-dropdown-menu">
+                    <a className="dash-nav-dropdown-item"><Link to="/instagram-post">Products 1</Link> </a>
+                </div>
             </div>
             <div className="dash-nav-dropdown ">
             <a href="#!" className="dash-nav-item dash-nav-dropdown-toggle">
                 <i className="fas fa-cube" /> Components </a>
             <div className="dash-nav-dropdown-menu">
-                <a href="cards.html" className="dash-nav-dropdown-item">Cards</a>
+                <a className="dash-nav-dropdown-item"><Link to="/datatable">Datatable</Link> </a>
                 <a href="forms.html" className="dash-nav-dropdown-item">Forms</a>
                 <div className="dash-nav-dropdown ">
                 <a href="#" className="dash-nav-dropdown-item dash-nav-dropdown-toggle">Icons</a>

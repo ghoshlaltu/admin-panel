@@ -8,6 +8,9 @@ import { useForm } from "react-hook-form";
 import BASE_URL from '../../config';
 
 
+import { MDBDataTable } from 'mdbreact';
+
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -118,6 +121,7 @@ function Testimonials() {
 
     // after add submit 
     const onSubmitAdd = async (data) => {
+      setLoading(true);
       const addFormData = {
           name: data.name,
           text: data.description
@@ -139,6 +143,7 @@ function Testimonials() {
          
           console.log(responseData.message); // Response data will be logged in the console
           SuccessNotify(responseData.message);
+          setLoading(false);
           reset(); 
           invokeModal(false);
           fetchData();
@@ -152,8 +157,10 @@ function Testimonials() {
     // after add submit 
 
     
-    // after add submit 
+    // after edit submit 
     const onSubmitEdit = async (data) => {
+      
+      setLoading(true);
       // editReset(); 
       //var formvalues = JSON.stringify(data);
       //console.log(JSON.parse(formvalues).edit_description);return false;
@@ -187,7 +194,7 @@ function Testimonials() {
           };
         });
     };
-    // after add submit 
+    // after edit submit 
 
     //call all testimonials data
     useEffect(() => {
@@ -208,7 +215,7 @@ function Testimonials() {
         });
         setData(response.data);
         SuccessNotify(response.data.message);
-        setLoading(false);
+        setLoading(false); 
       } catch (error) {
         console.error(error);
       }
@@ -291,12 +298,14 @@ function Testimonials() {
 
 
         <main className="dash-content">
-        <div className="container-fluid">
         {loading ? (
-          <div className="loader-container">
-            <div className="spinner"></div>
+           <div className="row">
+              <div className="loader-container">
+                <div className="spinner"></div>
+              </div>
           </div>
-        ) : "" }
+        ) : (
+          <div className="container-fluid">
             <div className="row">
               <div className="col-lg-6">
                 <h1 className="dash-title">All Testimonials</h1>
@@ -360,8 +369,8 @@ function Testimonials() {
             </div>
             
           </div>
-        
         </div>
+          )}
       </main>
       </>
     );

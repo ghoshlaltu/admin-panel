@@ -15,6 +15,8 @@ import TopbarlogoSection from './components/common/TopbarlogoSection';
 
 import DashboardView from './components/pages/Dashboard';
 import Testimonials from './components/pages/Testimonials';
+import MDDatatable from './components/pages/MDDatatable';
+import InstagramPost from './components/pages/InstagramPost';
 
 function App() {
 
@@ -46,8 +48,14 @@ function App() {
             <Topbar/>
 
             <Routes>
+              {/* if its users   */}
               <Route path="/admin-dashboard" element = {<DashboardView/> }/> 
               <Route path="/testimonials" element = {<Testimonials/> }/> 
+              <Route path="/instagram-post" element = {<InstagramPost/> }/> 
+              <Route path="/datatable" element = {<MDDatatable/> }/> 
+
+              {/* if admin  */}
+
             </Routes> 
 
           </div>

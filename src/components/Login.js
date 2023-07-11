@@ -21,6 +21,7 @@ function Login() {
 
     axios.post(apiUrl+'api/login', article)
     .then(result => {
+        //console.log(result);
         const bearerToken = result.data.data.token;
         // Store the token in the component's state
         // setToken(bearerToken);
@@ -39,6 +40,10 @@ function Login() {
 
   return (
       <>
+      {/* <Routes>
+        <Route path="/admin-dashboard" /> 
+        <Route path="/testimonials" /> 
+      </Routes>  */}
       <div className="form-screen">
             <a href="" className="spur-logo"><i className="fas fa-bolt"></i> <span>Spur</span></a>
             <div className="card account-dialog">
