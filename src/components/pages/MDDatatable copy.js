@@ -1,8 +1,5 @@
-
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import { MDBDataTable } from 'mdbreact';
-// import ReactDatatable from '@ashvin27/react-datatable';
-
 
 const MDDatatable = () => {
 

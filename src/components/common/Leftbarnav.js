@@ -29,12 +29,22 @@ function Leftbarnav() {
                 <div className="dash-nav-dropdown-menu">
                     <a className="dash-nav-dropdown-item"><Link to="/instagram-post">Products 1</Link> </a>
                 </div>
+                <div className="dash-nav-dropdown-menu">
+                    <a className="dash-nav-dropdown-item"><Link to="/stories">Products 2</Link> </a>
+                </div>
+                <div className="dash-nav-dropdown-menu">
+                    <a className="dash-nav-dropdown-item"><Link to="/films">Products 3</Link> </a>
+                </div>
+                <div className="dash-nav-dropdown-menu">
+                    <a className="dash-nav-dropdown-item"><Link to="/story-sliders">Products 4</Link> </a>
+                </div>
             </div>
             <div className="dash-nav-dropdown ">
             <a href="#!" className="dash-nav-item dash-nav-dropdown-toggle">
                 <i className="fas fa-cube" /> Components </a>
             <div className="dash-nav-dropdown-menu">
                 <a className="dash-nav-dropdown-item"><Link to="/datatable">Datatable</Link> </a>
+                <a className="dash-nav-dropdown-item"><Link to="/faqs">Products 55</Link> </a>
                 <a href="forms.html" className="dash-nav-dropdown-item">Forms</a>
                 <div className="dash-nav-dropdown ">
                 <a href="#" className="dash-nav-dropdown-item dash-nav-dropdown-toggle">Icons</a>
@@ -54,7 +64,8 @@ function Leftbarnav() {
             <a href="#!" className="dash-nav-item dash-nav-dropdown-toggle">
                 <i className="fas fa-file" /> Layouts </a>
             <div className="dash-nav-dropdown-menu">
-                <a href="blank.html" className="dash-nav-dropdown-item">Blank</a>
+                <a className="dash-nav-dropdown-item"><Link to="/story-comments">Products 55</Link> </a>
+                <a className="dash-nav-dropdown-item"><Link to="/contact-messages">Products 55</Link> </a>
                 <a href="content.html" className="dash-nav-dropdown-item">Content</a>
                 <a href="login.html" className="dash-nav-dropdown-item">Log in</a>
                 <a href="signup.html" className="dash-nav-dropdown-item">Sign up</a>

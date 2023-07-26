@@ -17,6 +17,13 @@ import DashboardView from './components/pages/Dashboard';
 import Testimonials from './components/pages/Testimonials';
 import MDDatatable from './components/pages/MDDatatable';
 import InstagramPost from './components/pages/InstagramPost';
+import Stories from './components/pages/Stories';
+import StoriesPosts from './components/pages/StoriesPosts';
+import Films from './components/pages/Films';
+import StorySliders from './components/pages/StorySliders';
+import StoryComments from './components/pages/StoryComments';
+import ContactMessages from './components/pages/ContactMessages';
+import Faq from './components/pages/Faq';
 
 function App() {
 
@@ -53,6 +60,13 @@ function App() {
               <Route path="/testimonials" element = {<Testimonials/> }/> 
               <Route path="/instagram-post" element = {<InstagramPost/> }/> 
               <Route path="/datatable" element = {<MDDatatable/> }/> 
+              <Route path="/stories" element = {<Stories/> }/> 
+              <Route path="/stories-post/:stories_id" element={<StoriesPosts />} />
+              <Route path="/films" element = {<Films/> }/> 
+              <Route path="/story-sliders" element = {<StorySliders/> }/> 
+              <Route path="/story-comments" element = {<StoryComments/> }/> 
+              <Route path="/contact-messages" element = {<ContactMessages/> }/> 
+              <Route path="/faqs" element = {<Faq/> }/> 
 
               {/* if admin  */}
 

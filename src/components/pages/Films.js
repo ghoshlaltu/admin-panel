@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-const InstagramPost = () => {
+const Films = () => {
   const apiUrl = BASE_URL;
   const SuccessNotify = (val) => toast.success('🦄 Success ! ' + val, {
                                   position: "top-right",
@@ -55,7 +55,7 @@ const fetchData = async () => {
     const data = {
       // Add your request payload here
     };
-    const response = await axios.post(apiUrl+'api/instagram-posts', data, {
+    const response = await axios.post(apiUrl+'api/films', data, {
       headers: {
         Authorization: token
       }
@@ -79,12 +79,6 @@ const fetchData = async () => {
       width: 150
     },
     {
-      label: 'Description',
-      field: 'description',
-      sort: 'asc',
-      width: 270
-    },
-    {
       label: 'Image',
       field: 'image',
       sort: 'asc',
@@ -93,6 +87,12 @@ const fetchData = async () => {
     {
       label: 'Status',
       field: 'status',
+      sort: 'asc',
+      width: 200
+    },
+    {
+      label: 'Show Home',
+      field: 'show_home',
       sort: 'asc',
       width: 200
     },
@@ -127,12 +127,8 @@ const fetchData = async () => {
       setLoading(true);
 
       const formData = new FormData();
-      // Append the file to the FormData object
-      formData.append('file', data.file[0]);
-
       // Append other form data fields
       formData.append('name', data.name);
-      formData.append('text', data.description);
       formData.append('link', data.link);
    
       const requestOptions = {
@@ -144,7 +140,7 @@ const fetchData = async () => {
       };
 
       try {
-        const response = await fetch(apiUrl+'api/instagram-post-store', requestOptions);
+        const response = await fetch(apiUrl+'api/films-store', requestOptions);
         if (response.ok) {
           const responseData = await response.json();
          
@@ -182,7 +178,7 @@ const fetchData = async () => {
     const [editApiData, setEditApiData] = useState(false);
     const handleEdit = async (rowId) => {
       setLoading(true);
-      axios.get(apiUrl+'api/instagram-post-details/'+rowId, {
+      axios.get(apiUrl+'api/films-details/'+rowId, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: token,
@@ -215,20 +211,14 @@ const fetchData = async () => {
       setLoading(true);
 
       const formData = new FormData();
-      // Append the file to the FormData object
-
-      // console.log(data.file);return false;
-      if(data.file){
-        formData.append('file', data.file[0]);
-      }
-      // 
+      // Append the file to the FormData object 
 
       // Append other form data fields
       formData.append('id', data.id);
       formData.append('name', data.name);
-      formData.append('text', data.description);
       formData.append('link', data.link);
       formData.append('status', data.status);
+      formData.append('show_home', data.show_home_status);
    
       const requestOptions = {
         method: 'POST',
@@ -239,7 +229,7 @@ const fetchData = async () => {
       };
 
       try {
-        const response = await fetch(apiUrl+'api/instagram-post-details-update', requestOptions);
+        const response = await fetch(apiUrl+'api/films-details-update', requestOptions);
         if (response.ok) {
           const responseData = await response.json();
           //console.log(responseData.message);
@@ -289,7 +279,7 @@ const fetchData = async () => {
         // alert(`Deleting ${value}...`);
         const article = { id: rowId };
 
-        axios.post(apiUrl+'api/instagram-post-delete', article, {
+        axios.post(apiUrl+'api/films-delete', article, {
           headers: {
             'Content-Type': 'application/json',
             Authorization: token,
@@ -314,7 +304,7 @@ const fetchData = async () => {
     <>
       <Modal show={isShow}>
         <Modal.Header closeButton onClick={closeModal}>
-          <Modal.Title>Add New Instagram Post</Modal.Title>
+          <Modal.Title>Add New Films Post</Modal.Title>
         </Modal.Header>
         <Modal.Body>
 
@@ -322,29 +312,6 @@ const fetchData = async () => {
             <Form.Label>Name</Form.Label>
             <Form.Control type="text" placeholder="Name" {...register("name", { required: true })}/>
             {errors.name && <span className='form-error'>Name is required</span>}
-            <br />
-            <Form.Label>Description</Form.Label>
-            {/* <Form.Control as="textarea" rows={3} placeholder="Description" {...register("description", { required: true })} /> */}
-            <CKEditor
-            {...register("description", { required: true })}
-            editor={ClassicEditor}
-            data=""
-            onReady={(editor) => {
-              console.log('Editor is ready to use!', editor);
-            }}
-            onChange={handleEditorChange} // Update the state variable when the CKEditor value changes
-            onBlur={(event, editor) => {
-              console.log('Blur.', editor);
-            }}
-            onFocus={(event, editor) => {
-              console.log('Focus.', editor);
-            }}
-          />
-            {errors.description && <span className='form-error'> Description is required</span>}
-            <br />
-            <Form.Label>Image</Form.Label>
-            <Form.Control type="file" placeholder="Name" {...register("file", { required: true })}/>
-            {errors.file && <span className='form-error'>Image is required</span>}
             <br />
             <Form.Label>Link</Form.Label>
             <Form.Control type="text" placeholder="link" {...register("link", { required: true })}/>
@@ -364,7 +331,7 @@ const fetchData = async () => {
 
       <Modal show={editIsShow}>
           <Modal.Header closeButton onClick={closeEditModal}>
-            <Modal.Title>Edit Instagram Post </Modal.Title>
+            <Modal.Title>Edit Films Post </Modal.Title>
           </Modal.Header>
           <Modal.Body>
           <form onSubmit={handleSubmitEdit(onSubmitEdit)}>
@@ -377,46 +344,13 @@ const fetchData = async () => {
                 {errorsEdit.name && <span className='form-error'>Name is required</span>}
               </div>
             </div>
-            <div className="form-group row">
-              <label for="inputPassword" className="col-sm-3 col-form-label">Description: </label>
-              <div className="col-sm-9">
-                {/* <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" {...registerEdit("description", { required: true })} defaultValue={editApiData?.text}></textarea> */}
-                <CKEditor
-                  {...registerEdit('description', { required: true })}
-                  editor={ClassicEditor}
-                  data={editApiData?.text} // Set the initial CKEditor value
-                  onReady={(editor) => {
-                    console.log('Editor is ready to use!', editor);
-                  }}
-                  onChange={handleEditorChangeE}
-                  onBlur={(event, editor) => {
-                    console.log('Blur.', editor);
-                  }}
-                  onFocus={(event, editor) => {
-                    console.log('Focus.', editor);
-                  }}
-                />
-                {errorsEdit.description && <span className='form-error'> Description is required</span>}
-              </div>
-            </div>
+            
 
             <div className="form-group row">
               <label for="staticEmail" className="col-sm-3 col-form-label">Link: </label>
               <div className="col-sm-9">
                 <input type="text" className="form-control" {...registerEdit("link", { required: true })} defaultValue={editApiData?.link} />
                 {errorsEdit.link && <span className='form-error'>Link is required</span>}
-              </div>
-            </div>
-
-            <div className="form-group row">
-              <label for="inputPassword" className="col-sm-3 col-form-label">File: </label>
-              <div className="col-sm-6">
-                 <input type="file" className="form-control"  {...registerEdit("file")}/>
-              </div>
-              <div className="col-sm-3">
-                <a href={apiUrl+ editApiData?.image} target='_blanlk'>
-                 <img src={apiUrl+ editApiData?.image} alt='IMG' height="50px"></img>
-                 </a>
               </div>
             </div>
             
@@ -426,6 +360,16 @@ const fetchData = async () => {
                 <select class="form-control" {...registerEdit("status", { required: true })} defaultValue={editApiData?.status}>
                   <option value="Enable">Enable</option>
                   <option value="Disable">Disable</option>
+                </select>
+              </div>
+            </div>
+            
+            <div className="form-group row">
+              <label for="inputPassword" className="col-sm-3 col-form-label">Show Home Status: </label>
+              <div className="col-sm-9">
+                <select class="form-control" {...registerEdit("show_home_status", { required: true })} defaultValue={editApiData?.show_home}>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
                 </select>
               </div>
             </div>
@@ -462,7 +406,7 @@ const fetchData = async () => {
               <div className="container-fluid">
               <div className="row">
               <div className="col-lg-6">
-                <h1 className="dash-title">All Instagram Posts</h1>
+                <h1 className="dash-title">All Films Posts</h1>
                 <ToastContainer
                     position="top-right"
                     autoClose={5000}
@@ -492,9 +436,17 @@ const fetchData = async () => {
                         columns: columns,
                         rows: myData.data ? myData.data.map((item) => ({
                           name: item.name,
-                          description: item.text,
-                          image: <img src={BASE_URL+item.image} alt="Image" height="25px" />,
+                          image:  <iframe src={'https://www.youtube.com/embed/'+item.link}
+                          frameborder='0'
+                          width="350"
+                          height="100%"
+                          allow='autoplay; encrypted-media'
+                          allowfullscreen
+                          title='video'
+                  />,
+                  // <img src={BASE_URL+item.image} alt="Image" height="25px" />,
                           status: item.status,
+                          show_home: item.show_home,
                           actions: (
                             <>
                             <Button variant="info btn-sm" onClick={() => handleEdit(item.id)} > <i className='fa fa-edit'></i></Button>
@@ -514,4 +466,4 @@ const fetchData = async () => {
   );
 }
 
-export default InstagramPost;
+export default Films;

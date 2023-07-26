@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-const InstagramPost = () => {
+const Faq = () => {
   const apiUrl = BASE_URL;
   const SuccessNotify = (val) => toast.success('🦄 Success ! ' + val, {
                                   position: "top-right",
@@ -55,7 +55,7 @@ const fetchData = async () => {
     const data = {
       // Add your request payload here
     };
-    const response = await axios.post(apiUrl+'api/instagram-posts', data, {
+    const response = await axios.post(apiUrl+'api/faqs', data, {
       headers: {
         Authorization: token
       }
@@ -73,6 +73,12 @@ const fetchData = async () => {
 
   const columns = [
     {
+      label: 'Showing Place',
+      field: 'show_side',
+      sort: 'asc',
+      width: 150
+    },
+    {
       label: 'Name',
       field: 'name',
       sort: 'asc',
@@ -83,12 +89,6 @@ const fetchData = async () => {
       field: 'description',
       sort: 'asc',
       width: 270
-    },
-    {
-      label: 'Image',
-      field: 'image',
-      sort: 'asc',
-      width: 100
     },
     {
       label: 'Status',
@@ -127,13 +127,10 @@ const fetchData = async () => {
       setLoading(true);
 
       const formData = new FormData();
-      // Append the file to the FormData object
-      formData.append('file', data.file[0]);
-
       // Append other form data fields
-      formData.append('name', data.name);
+      formData.append('cat', data.cat);
+      formData.append('title', data.title);
       formData.append('text', data.description);
-      formData.append('link', data.link);
    
       const requestOptions = {
         method: 'POST',
@@ -144,7 +141,7 @@ const fetchData = async () => {
       };
 
       try {
-        const response = await fetch(apiUrl+'api/instagram-post-store', requestOptions);
+        const response = await fetch(apiUrl+'api/faq-store', requestOptions);
         if (response.ok) {
           const responseData = await response.json();
          
@@ -182,7 +179,7 @@ const fetchData = async () => {
     const [editApiData, setEditApiData] = useState(false);
     const handleEdit = async (rowId) => {
       setLoading(true);
-      axios.get(apiUrl+'api/instagram-post-details/'+rowId, {
+      axios.get(apiUrl+'api/faq-details/'+rowId, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: token,
@@ -225,9 +222,9 @@ const fetchData = async () => {
 
       // Append other form data fields
       formData.append('id', data.id);
-      formData.append('name', data.name);
+      formData.append('title', data.title);
       formData.append('text', data.description);
-      formData.append('link', data.link);
+      formData.append('cat', data.cat);
       formData.append('status', data.status);
    
       const requestOptions = {
@@ -239,7 +236,7 @@ const fetchData = async () => {
       };
 
       try {
-        const response = await fetch(apiUrl+'api/instagram-post-details-update', requestOptions);
+        const response = await fetch(apiUrl+'api/faq-details-update', requestOptions);
         if (response.ok) {
           const responseData = await response.json();
           //console.log(responseData.message);
@@ -314,14 +311,24 @@ const fetchData = async () => {
     <>
       <Modal show={isShow}>
         <Modal.Header closeButton onClick={closeModal}>
-          <Modal.Title>Add New Instagram Post</Modal.Title>
+          <Modal.Title>Add New Faq Post</Modal.Title>
         </Modal.Header>
         <Modal.Body>
 
           <form  onSubmit={handleSubmit(onSubmitAdd)}>
-            <Form.Label>Name</Form.Label>
-            <Form.Control type="text" placeholder="Name" {...register("name", { required: true })}/>
-            {errors.name && <span className='form-error'>Name is required</span>}
+            
+            <Form.Label>Showing Place</Form.Label>
+            <select class="form-control" {...register("cat", { required: true })} >
+              <option value="">Select</option>
+              <option value="Left">Left</option>
+              <option value="Right">Right</option>
+            </select>
+            {errors.cat && <span className='form-error'>Showing Place is required</span>}
+            <br />
+
+            <Form.Label>Title Name</Form.Label>
+            <Form.Control type="text" placeholder="Name" {...register("title", { required: true })}/>
+            {errors.title && <span className='form-error'>Title Name is required</span>}
             <br />
             <Form.Label>Description</Form.Label>
             {/* <Form.Control as="textarea" rows={3} placeholder="Description" {...register("description", { required: true })} /> */}
@@ -341,14 +348,7 @@ const fetchData = async () => {
             }}
           />
             {errors.description && <span className='form-error'> Description is required</span>}
-            <br />
-            <Form.Label>Image</Form.Label>
-            <Form.Control type="file" placeholder="Name" {...register("file", { required: true })}/>
-            {errors.file && <span className='form-error'>Image is required</span>}
-            <br />
-            <Form.Label>Link</Form.Label>
-            <Form.Control type="text" placeholder="link" {...register("link", { required: true })}/>
-            {errors.link && <span className='form-error'>Link is required</span>}
+           
             <br />
             <div className='text-right'>
             <Button variant="success" type="submit">
@@ -364,17 +364,29 @@ const fetchData = async () => {
 
       <Modal show={editIsShow}>
           <Modal.Header closeButton onClick={closeEditModal}>
-            <Modal.Title>Edit Instagram Post </Modal.Title>
+            <Modal.Title>Edit Faq Post </Modal.Title>
           </Modal.Header>
           <Modal.Body>
           <form onSubmit={handleSubmitEdit(onSubmitEdit)}>
 
           <input type="hidden" className="form-control" {...registerEdit("id", { required: true })} defaultValue={editApiData?.id} />
-            <div className="form-group row">
+           <div className="form-group row">
               <label for="staticEmail" className="col-sm-3 col-form-label">Name: </label>
               <div className="col-sm-9">
-                <input type="text" className="form-control" {...registerEdit("name", { required: true })} defaultValue={editApiData?.name} />
-                {errorsEdit.name && <span className='form-error'>Name is required</span>}
+                <select class="form-control" {...registerEdit("cat", { required: true })}  defaultValue={editApiData?.cat}>
+                  <option value="">Select</option>
+                  <option value="Left">Left</option>
+                  <option value="Right">Right</option>
+                </select>
+                {errorsEdit.name && <span className='form-error'>Showing Place is required</span>}
+              </div>
+            </div>
+
+            <div className="form-group row">
+              <label for="staticEmail" className="col-sm-3 col-form-label">Title Name: </label>
+              <div className="col-sm-9">
+                <input type="text" className="form-control" {...registerEdit("title", { required: true })} defaultValue={editApiData?.name} />
+                {errorsEdit.title && <span className='form-error'>Title Name is required</span>}
               </div>
             </div>
             <div className="form-group row">
@@ -400,25 +412,7 @@ const fetchData = async () => {
               </div>
             </div>
 
-            <div className="form-group row">
-              <label for="staticEmail" className="col-sm-3 col-form-label">Link: </label>
-              <div className="col-sm-9">
-                <input type="text" className="form-control" {...registerEdit("link", { required: true })} defaultValue={editApiData?.link} />
-                {errorsEdit.link && <span className='form-error'>Link is required</span>}
-              </div>
-            </div>
-
-            <div className="form-group row">
-              <label for="inputPassword" className="col-sm-3 col-form-label">File: </label>
-              <div className="col-sm-6">
-                 <input type="file" className="form-control"  {...registerEdit("file")}/>
-              </div>
-              <div className="col-sm-3">
-                <a href={apiUrl+ editApiData?.image} target='_blanlk'>
-                 <img src={apiUrl+ editApiData?.image} alt='IMG' height="50px"></img>
-                 </a>
-              </div>
-            </div>
+          
             
             <div className="form-group row">
               <label for="inputPassword" className="col-sm-3 col-form-label">Status: </label>
@@ -491,9 +485,9 @@ const fetchData = async () => {
                       data={{
                         columns: columns,
                         rows: myData.data ? myData.data.map((item) => ({
-                          name: item.name,
+                          show_side: item.cat,
+                          name: item.title,
                           description: item.text,
-                          image: <img src={BASE_URL+item.image} alt="Image" height="25px" />,
                           status: item.status,
                           actions: (
                             <>
@@ -514,4 +508,4 @@ const fetchData = async () => {
   );
 }
 
-export default InstagramPost;
+export default Faq;
