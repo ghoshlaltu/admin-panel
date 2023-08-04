@@ -24,6 +24,7 @@ import StorySliders from './components/pages/StorySliders';
 import StoryComments from './components/pages/StoryComments';
 import ContactMessages from './components/pages/ContactMessages';
 import Faq from './components/pages/Faq';
+import Siteinfo from './components/pages/Siteinfo';
 
 function App() {
 
@@ -67,6 +68,7 @@ function App() {
               <Route path="/story-comments" element = {<StoryComments/> }/> 
               <Route path="/contact-messages" element = {<ContactMessages/> }/> 
               <Route path="/faqs" element = {<Faq/> }/> 
+              <Route path="//site-info" element = {<Siteinfo/> }/> 
 
               {/* if admin  */}
 

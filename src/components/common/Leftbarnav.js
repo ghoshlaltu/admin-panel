@@ -45,6 +45,7 @@ function Leftbarnav() {
             <div className="dash-nav-dropdown-menu">
                 <a className="dash-nav-dropdown-item"><Link to="/datatable">Datatable</Link> </a>
                 <a className="dash-nav-dropdown-item"><Link to="/faqs">Products 55</Link> </a>
+                <a className="dash-nav-dropdown-item"><Link to="/site-info">Products 555</Link> </a>
                 <a href="forms.html" className="dash-nav-dropdown-item">Forms</a>
                 <div className="dash-nav-dropdown ">
                 <a href="#" className="dash-nav-dropdown-item dash-nav-dropdown-toggle">Icons</a>
