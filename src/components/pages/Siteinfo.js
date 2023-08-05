@@ -113,7 +113,7 @@ const onSubmitEdit = async (data) => {
     formData.append('text4', data.text4);
 
     formData.append('text5', data.text5);
-    formData.append('text5', data.text5);
+    formData.append('text6', data.text6);
 
     formData.append('mt1', data.mt1);
     formData.append('md1', data.md1);
