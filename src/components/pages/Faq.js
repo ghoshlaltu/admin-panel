@@ -456,7 +456,7 @@ const fetchData = async () => {
               <div className="container-fluid">
               <div className="row">
               <div className="col-lg-6">
-                <h1 className="dash-title">All Instagram Posts</h1>
+                <h1 className="dash-title">All Faqs Posts</h1>
                 <ToastContainer
                     position="top-right"
                     autoClose={5000}

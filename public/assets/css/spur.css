@@ -4074,6 +4074,7 @@ input[type="button"].btn-block {
   margin-left: 1.25rem; }
 
 .card-header {
+  background-color: #ee256d !important;
   padding: 0.75rem 1.25rem;
   margin-bottom: 0;
   background-color: rgba(0, 0, 0, 0.03);
@@ -8869,7 +8870,7 @@ body {
     .dash-nav a:hover {
       text-decoration: none; }
   .dash-nav.dash-nav-dark {
-    background-color: #181F2C; }
+    background-color: #9f355e; }
     .dash-nav.dash-nav-dark a {
       color: #fff; }
 
@@ -9083,9 +9084,14 @@ body {
   background: #FF5A00;
   color: #fff; }
 
+
+  .lgo {
+    height: 50px !important;
+  }
 .dash-toolbar {
+  background: #c0c0c0;
   min-height: 84px;
-  background-color: #F3F3F3;
+  /* background-color: #F3F3F3; */
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;

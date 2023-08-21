@@ -68,7 +68,7 @@ function App() {
               <Route path="/story-comments" element = {<StoryComments/> }/> 
               <Route path="/contact-messages" element = {<ContactMessages/> }/> 
               <Route path="/faqs" element = {<Faq/> }/> 
-              <Route path="//site-info" element = {<Siteinfo/> }/> 
+              <Route path="/site-info" element = {<Siteinfo/> }/> 
 
               {/* if admin  */}
 

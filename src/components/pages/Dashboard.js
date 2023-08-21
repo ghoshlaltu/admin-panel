@@ -6,9 +6,9 @@ function DashboardContent() {
         <main className="dash-content">
             <div className="container-fluid">
               <div className="row dash-row">
-                <div className="col-xl-4">
+                <div className="col-xl-6">
                   <div className="stats stats-primary">
-                    <h3 className="stats-title"> Sign ups </h3>
+                    <h3 className="stats-title"> Stories </h3>
                     <div className="stats-content">
                       <div className="stats-icon">
                         <i className="fas fa-user" />
@@ -16,31 +16,31 @@ function DashboardContent() {
                       <div className="stats-data">
                         <div className="stats-number">114</div>
                         <div className="stats-change">
-                          <span className="stats-percentage">+25%</span>
-                          <span className="stats-timeframe">from last month</span>
+                          {/* <span className="stats-percentage">+25%</span>
+                          <span className="stats-timeframe">from last month</span> */}
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="col-xl-4">
+                <div className="col-xl-6">
                   <div className="stats stats-success ">
-                    <h3 className="stats-title"> Revenue </h3>
+                    <h3 className="stats-title"> Films </h3>
                     <div className="stats-content">
                       <div className="stats-icon">
-                        <i className="fas fa-cart-arrow-down" />
+                        <i className="fas fa-phone" />
                       </div>
                       <div className="stats-data">
-                        <div className="stats-number">$25,541</div>
+                        <div className="stats-number">25</div>
                         <div className="stats-change">
-                          <span className="stats-percentage">+17.5%</span>
-                          <span className="stats-timeframe">from last month</span>
+                          {/* <span className="stats-percentage">+17.5%</span>
+                          <span className="stats-timeframe">from last month</span> */}
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="col-xl-4">
+                {/* <div className="col-xl-4">
                   <div className="stats stats-danger">
                     <h3 className="stats-title"> Open tickets </h3>
                     <div className="stats-content">
@@ -52,9 +52,9 @@ function DashboardContent() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
-              <div className="row">
+              {/* <div className="row">
                 <div className="col-xl-6">
                   <div className="card spur-card">
                     <div className="card-header">
@@ -117,7 +117,7 @@ function DashboardContent() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </main>
       </>

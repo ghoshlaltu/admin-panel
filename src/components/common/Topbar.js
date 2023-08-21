@@ -18,7 +18,7 @@ function Topbar() {
         <a href="#" className="searchbox-toggle">
           <i className="fas fa-search" />
         </a>
-        <form className="searchbox" action="">
+        {/* <form className="searchbox" action="">
           <a href="#" className="searchbox-toggle">
             {" "}
             <i className="fas fa-arrow-left" />{" "}
@@ -32,7 +32,7 @@ function Topbar() {
             className="searchbox-input"
             placeholder="type to search"
           />
-        </form>
+        </form> */}
         <div className="tools">
          
           <div className="dropdown tools-item">

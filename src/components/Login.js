@@ -6,6 +6,8 @@ import { Routes, Route, useNavigate  } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 
+import Wedrise_logo from './../Wedrise_logo.jpg'
+
 function Login() {
   const apiUrl = BASE_URL;
   //console.log(apiUrl);
@@ -45,9 +47,9 @@ function Login() {
         <Route path="/testimonials" /> 
       </Routes>  */}
       <div className="form-screen">
-            <a href="" className="spur-logo"><i className="fas fa-bolt"></i> <span>Spur</span></a>
+            <a href="" className="spur-logo"><img src={Wedrise_logo} className="lgo" alt="logo" /> </a>
             <div className="card account-dialog">
-                <div className="card-header bg-primary text-white"> Please sign in </div>
+                <div className="card-header login-header  text-white"> Please sign in </div>
                 <div className="card-body">
                 <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-group">
@@ -64,7 +66,7 @@ function Login() {
                             </div>
                         </div>
                         <div className="account-dialog-actions">
-                            <button type="submit" className="btn btn-primary">Sign in</button>
+                            <button type="submit" className="btn btn-info">Sign in</button>
                         </div>
                     </form>
                 </div>

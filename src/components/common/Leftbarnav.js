@@ -21,32 +21,45 @@ function Leftbarnav() {
                 <i className="fas fa-home" /> <Link to="/admin-dashboard">Dashboard</Link> 
             </a>
             <div className="dash-nav-dropdown">
-                <a href="#!" className="dash-nav-item dash-nav-dropdown-toggle">
-                    <i className="fas fa-chart-bar" /> Product </a>
+                <a href="javascript:void(0)" className="dash-nav-item dash-nav-dropdown-toggle">
+                    <i className="fas fa-chart-bar" /> Home  </a>
                 <div className="dash-nav-dropdown-menu">
-                    <a className="dash-nav-dropdown-item"><Link to="/testimonials">Products</Link> </a>
+                    <a className="dash-nav-dropdown-item"><Link to="/testimonials">Home Testimonials</Link> </a>
                 </div>
                 <div className="dash-nav-dropdown-menu">
-                    <a className="dash-nav-dropdown-item"><Link to="/instagram-post">Products 1</Link> </a>
+                    <a className="dash-nav-dropdown-item"><Link to="/instagram-post">Instagram Posts</Link> </a>
+                </div>
+              
+            </div>
+            
+            <div className="dash-nav-dropdown">
+                <a href="javascript:void(0)" className="dash-nav-item dash-nav-dropdown-toggle">
+                    <i className="fas fa-cubes" /> Story Page  </a>
+                
+                <div className="dash-nav-dropdown-menu">
+                    <a className="dash-nav-dropdown-item"><Link to="/story-sliders">Stories Page Sliders</Link> </a>
                 </div>
                 <div className="dash-nav-dropdown-menu">
-                    <a className="dash-nav-dropdown-item"><Link to="/stories">Products 2</Link> </a>
-                </div>
-                <div className="dash-nav-dropdown-menu">
-                    <a className="dash-nav-dropdown-item"><Link to="/films">Products 3</Link> </a>
-                </div>
-                <div className="dash-nav-dropdown-menu">
-                    <a className="dash-nav-dropdown-item"><Link to="/story-sliders">Products 4</Link> </a>
+                    <a className="dash-nav-dropdown-item"><Link to="/stories">All Stories</Link> </a>
                 </div>
             </div>
+            
+            <div className="dash-nav-dropdown">
+                <a href="javascript:void(0)" className="dash-nav-item dash-nav-dropdown-toggle">
+                    <i className="fas fa-building" /> Films Page  </a>
+                
+                <div className="dash-nav-dropdown-menu">
+                    <a className="dash-nav-dropdown-item"><Link to="/films">Films Posts</Link> </a>
+                </div>
+            </div>
+
             <div className="dash-nav-dropdown ">
-            <a href="#!" className="dash-nav-item dash-nav-dropdown-toggle">
-                <i className="fas fa-cube" /> Components </a>
+            <a href="javascript:void(0)" className="dash-nav-item dash-nav-dropdown-toggle">
+                <i className="fas fa-cube" /> Faqs </a>
             <div className="dash-nav-dropdown-menu">
-                <a className="dash-nav-dropdown-item"><Link to="/datatable">Datatable</Link> </a>
-                <a className="dash-nav-dropdown-item"><Link to="/faqs">Products 55</Link> </a>
-                <a className="dash-nav-dropdown-item"><Link to="/site-info">Products 555</Link> </a>
-                <a href="forms.html" className="dash-nav-dropdown-item">Forms</a>
+                {/* <a className="dash-nav-dropdown-item"><Link to="/datatable">Datatable</Link> </a> */}
+                <a className="dash-nav-dropdown-item"><Link to="/faqs">Faqs</Link> </a>
+                {/* <a href="forms.html" className="dash-nav-dropdown-item">Forms</a>
                 <div className="dash-nav-dropdown ">
                 <a href="#" className="dash-nav-dropdown-item dash-nav-dropdown-toggle">Icons</a>
                 <div className="dash-nav-dropdown-menu">
@@ -58,32 +71,28 @@ function Leftbarnav() {
                 <a href="stats.html" className="dash-nav-dropdown-item">Stats</a>
                 <a href="tables.html" className="dash-nav-dropdown-item">Tables</a>
                 <a href="typography.html" className="dash-nav-dropdown-item">Typography</a>
-                <a href="userinterface.html" className="dash-nav-dropdown-item">User Interface</a>
+                <a href="userinterface.html" className="dash-nav-dropdown-item">User Interface</a> */}
             </div>
             </div>
             <div className="dash-nav-dropdown">
-            <a href="#!" className="dash-nav-item dash-nav-dropdown-toggle">
-                <i className="fas fa-file" /> Layouts </a>
+            <a href="javascript:void(0)" className="dash-nav-item dash-nav-dropdown-toggle">
+                <i className="fas fa-file" /> Enquiry Messages </a>
             <div className="dash-nav-dropdown-menu">
-                <a className="dash-nav-dropdown-item"><Link to="/story-comments">Products 55</Link> </a>
-                <a className="dash-nav-dropdown-item"><Link to="/contact-messages">Products 55</Link> </a>
-                <a href="content.html" className="dash-nav-dropdown-item">Content</a>
-                <a href="login.html" className="dash-nav-dropdown-item">Log in</a>
-                <a href="signup.html" className="dash-nav-dropdown-item">Sign up</a>
+                {/* <a className="dash-nav-dropdown-item"><Link to="/story-comments">Products 55</Link> </a> */}
+                <a className="dash-nav-dropdown-item"><Link to="/contact-messages">All Enquiries</Link> </a>
             </div>
             </div>
             <div className="dash-nav-dropdown">
-                <a href="#!" className="dash-nav-item dash-nav-dropdown-toggle">
-                     <i className="fas fa-info" /> About 
+                <a href="javascript:void(0)" className="dash-nav-item dash-nav-dropdown-toggle">
+                     <i className="fas fa-info" /> Site Info 
                 </a>
                 <div className="dash-nav-dropdown-menu">
-                    <a href="https://github.com/HackerThemes/spur-template" target="_blank" className="dash-nav-dropdown-item">GitHub</a>
-                    <a href="http://hackerthemes.com" target="_blank" className="dash-nav-dropdown-item">HackerThemes</a>
+                    <a className="dash-nav-dropdown-item"><Link to="/site-info">Site Info </Link> </a>
                 </div>
             </div>
-            <a className="dash-nav-item">
+            {/* <a className="dash-nav-item">
                 <i className="fas fa-home" /> <button onClick={removeDataFromLocalStorage}>Remove Data</button>
-            </a>
+            </a> */}
         </nav>
       </>
     );
