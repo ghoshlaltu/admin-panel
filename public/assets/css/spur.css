@@ -9361,3 +9361,8 @@ thead {
 .table>tbody {
   text-align: center !important;
 }
+
+.form-screen 
+{
+  background-image: url('./../login.jpg');
+}
