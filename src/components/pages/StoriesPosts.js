@@ -85,6 +85,12 @@ const fetchData = async () => {
       width: 100
     },
     {
+      label: 'Order By',
+      field: 'orderby',
+      sort: 'asc',
+      width: 100
+    },
+    {
       label: 'Status',
       field: 'status',
       sort: 'asc',
@@ -293,7 +299,36 @@ const fetchData = async () => {
       }
     };
     // delete 
+    // order by update  
+    const handleOrderChange = (id, e, i) => {
+      //const updatedData = [...data];
+      //updatedData[i].orderby = e.target.value;
+      //setData(updatedData);
+      // alert(e.target.value);
+      // console.log(e.target.value);
+      // console.log(id);
+      if(e.target.value){
+        const article = { id: id,  order_by: e.target.value  };
 
+        axios.post(apiUrl+'api/stories-posts-orderby-update', article, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: token,
+          },
+        })
+          .then(response => {
+            SuccessNotify(response.data.message);
+            fetchData();
+            setLoading(false);
+          })
+          .catch(error => {
+            // console.error('Error fetching data:', error);
+            ErrorNotify(error.response.data.data)
+          });
+      }
+     
+    };
+    // order by update  
   return (
     <>
       <Modal show={isShow}>
@@ -415,9 +450,10 @@ const fetchData = async () => {
                       // data={data}
                       data={{
                         columns: columns,
-                        rows: myData.data ? myData.data.map((item) => ({
+                        rows: myData.data ? myData.data.map((item, i) => ({
                           name: item.storie.name,
                           image: <img src={BASE_URL+item.image} alt="Image" height="25px" />,
+                          orderby: <input type='number' name='order' defaultValue={item.order_by} onChange={(e) => handleOrderChange(item.id, e, i)}/>,
                           status: item.status,
                           actions: (
                             <>
